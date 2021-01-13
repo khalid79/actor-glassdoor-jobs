@@ -76,11 +76,11 @@ const searchJobs = async (query, location, maxResults, searchEndpoint, headers) 
         if(nextPageUrl){
             baseUrl = nextPageUrl.split('.htm?p=')[0];
             pageNumber = nextPageUrl.split('.htm?p=')[1];
-            newNextPage = baseUrl + '_IP' + pageNumber + '.html';
+            nextPageUrl = baseUrl + '_IP' + pageNumber + '.html';
         }
-        log.info(`Page ${page}: Found ${itemsToSave.length} items, next page: ${newNextPage}`);
+        log.info(`Page ${page}: Found ${itemsToSave.length} items, next page: ${nextPageUrl}`);
         page++;
-    } while (newNextPage && savedItems < maximumResults && itemsToSave && itemsToSave.length > 0);
+    } while (nextPageUrl && savedItems < maximumResults && itemsToSave && itemsToSave.length > 0);
 
     return searchResults;
 };
