@@ -76,7 +76,7 @@ const searchJobs = async (query, location, maxResults, searchEndpoint, headers) 
         if(nextPageUrl){
             baseUrl = nextPageUrl.split('.htm?p=')[0];
             pageNumber = nextPageUrl.split('.htm?p=')[1];
-            nextPageUrl = baseUrl + '_IP' + pageNumber + '.html';
+            nextPageUrl = baseUrl + '_IP' + pageNumber + '.htm';
         }
         log.info(`Page ${page}: Found ${itemsToSave.length} items, next page: ${nextPageUrl}`);
         page++;
