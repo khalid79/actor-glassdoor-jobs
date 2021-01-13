@@ -73,9 +73,14 @@ const searchJobs = async (query, location, maxResults, searchEndpoint, headers) 
         searchResults.push(...itemsToSave);
         savedItems += itemsToSave.length;
         nextPageUrl = $('li.next a', '#FooterPageNav').attr('href');
-        log.info(`Page ${page}: Found ${itemsToSave.length} items, next page: ${nextPageUrl}`);
+        if(nextPageUrl){
+            baseUrl = nextPageUrl.split('.htm?p=')[0];
+            pageNumber = nextPageUrl.split('.htm?p=')[1];
+            newNextPage = baseUrl + '_IP' + pageNumber + '.html';
+        }
+        log.info(`Page ${page}: Found ${itemsToSave.length} items, next page: ${newNextPage}`);
         page++;
-    } while (nextPageUrl && savedItems < maximumResults && itemsToSave && itemsToSave.length > 0);
+    } while (newNextPage && savedItems < maximumResults && itemsToSave && itemsToSave.length > 0);
 
     return searchResults;
 };
